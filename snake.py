@@ -1,12 +1,13 @@
-import turtle as t
+from turtle import Turtle
 
 START_POSITION = [(0, 0), (-20, 0), (-40, 0)]
 STEP = 20
 
 
-class Snake:
+class Snake(Turtle):
 
     def __init__(self):
+        super().__init__()
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
@@ -16,7 +17,7 @@ class Snake:
             self.add_segment(position)
 
     def add_segment(self, position):
-        segment = t.Turtle("square")
+        segment = Turtle("square")
         segment.color("white")
         segment.penup()
         segment.goto(position)
@@ -47,3 +48,10 @@ class Snake:
     def right(self):
         if self.head.heading() != 180:
             self.head.setheading(0)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
